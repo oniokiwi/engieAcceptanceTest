@@ -21,7 +21,7 @@ HDR=typedef.h \
     engie.h 
     
 
-LIBS=-lpthread -lmodbus -lmicrohttpd -ljson -lcurl
+LIBS=-lpthread -lmodbus
 
 #DEPS = $(patsubst %,$(IDIR)/%,$(HDR))
 OBJ=$(patsubst %.c,%.o,$(SRC_C))
