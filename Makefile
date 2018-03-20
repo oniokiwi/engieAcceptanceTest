@@ -6,7 +6,7 @@ LDIR=/usr/local/lib
 TARGET=engieAccepTest
 CC=gcc
 #CFLAGS=-I$(IDIR) -L$(LDIR) -g -std=gnu99
-CFLAGS= -g -I/usr/local/include -I/usr/include/json-c/ -L/usr/local/lib
+CFLAGS= -g -I/usr/local/include -L/usr/local/lib
 
 .PHONY: default all clean check cron
 
@@ -38,7 +38,12 @@ check:
 	@echo ' OBJ    = $(OBJ)             '
 	@echo ' HDR    = $(HDR)             '
 	@echo '#############################'
-	
+
+cronjobstart:
+	crontab -u ${USER} cronjob.txt
+
+cronjobstop:
+	crontab -u ${USER} -r	
 
 clean:
 	rm -f *.o $(TARGET) 

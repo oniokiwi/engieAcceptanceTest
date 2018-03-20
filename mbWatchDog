@@ -1,0 +1,24 @@
+#!/bin/bash
+
+id="0"
+
+
+check_process_running()
+{
+    id=`ps aux | grep engieAcceptanceTest | grep -v grep | awk ' { print $2 }'`
+    echo ${id}
+}
+
+entry()
+{
+    check_process_running
+    if [ -z $id ] ; then
+        ${HOME}/workspace/workspace/engieAcceptanceTest/engieAcceptanceTest
+    fi
+}
+
+# check if process running and if not running restart it.
+echo "running mdWatchdog"
+entry
+
+
