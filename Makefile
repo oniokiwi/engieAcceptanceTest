@@ -3,7 +3,7 @@ IDIR=../libmodbus/src
 LDIR=/usr/local/lib
 
 
-TARGET=engieAccepTest
+TARGET=engieAcceptTest
 CC=gcc
 #CFLAGS=-I$(IDIR) -L$(LDIR) -g -std=gnu99
 CFLAGS= -g -I/usr/local/include -L/usr/local/lib
