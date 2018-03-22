@@ -141,8 +141,6 @@ int _writePowerToDeliver(uint16_t value)
 {
 	uint16_t val = value;
 
-    if (debug) printf("%s\n", __PRETTY_FUNCTION__);
-
     power_to_deliver = val;
     if ( val & sign_bit_mask )
     {
