@@ -117,7 +117,7 @@ int _stateOfCharge ()
     address = mb_mapping->tab_registers + address_offset;
     if ( address < (mb_mapping->tab_registers + mb_mapping-> nb_registers) )
     {
-       *address = state_of_charge;
+       *address = (state_of_charge * 10);
     }
     return MODBUS_SUCCESS;
 }
