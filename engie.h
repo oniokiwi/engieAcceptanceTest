@@ -10,8 +10,8 @@
 #include <modbus/modbus.h>
 #include "typedefs.h"
 
-#define StateOfCharge      1
-#define PowerToDeliver     2
+#define PowerToDeliver     1
+#define StateOfCharge      2
 
 void  init(init_param_t* );
 void  dispose();
