@@ -185,6 +185,12 @@ void dispose()
     pthread_join(thread1, NULL);
 }
 
+void disconnect()
+{
+    state_of_charge = state_of_charge_default;
+}
+
+
 
 //
 // Thread handler

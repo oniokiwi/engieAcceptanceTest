@@ -111,6 +111,7 @@ int main(int argc, char* argv[])
             switch (rc)
             {
             case -1:
+            	disconnect();
                 close(s); // close the socket
                 modbus_close(param.ctx);
                 modbus_free(param.ctx);

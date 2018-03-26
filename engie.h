@@ -15,6 +15,7 @@
 
 void  init(init_param_t* );
 void  dispose();
+void  disconnect();
 int   process_read_register(uint16_t address, uint16_t data);
 int   process_write_register(uint16_t address, uint16_t data);
 
