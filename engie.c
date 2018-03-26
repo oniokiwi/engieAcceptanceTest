@@ -1,4 +1,4 @@
-#include <stdio.h>
+include <stdio.h>
 #include <stdlib.h>
 #include "engie.h"
 #include "typedefs.h"
@@ -139,7 +139,7 @@ int _readPowerToDeliver()
 
 int _writePowerToDeliver(uint16_t value)
 {
-	uint16_t val = value;
+    uint16_t val = value;
 
     power_to_deliver = val;
     if ( val & sign_bit_mask )
@@ -187,6 +187,7 @@ void dispose()
 
 void disconnect()
 {
+    if (debug) printf("%s\n", __PRETTY_FUNCTION__);
     state_of_charge = state_of_charge_default;
 }
 
@@ -207,30 +208,30 @@ void *_thread_handler( void *ptr )
     while ( *terminate == false )
     {
         sleep(1);
-		if (battery_charging)
-		{
-			if ( (state_of_charge + battery_charge_increment) <= battery_fully_charged )
-			{
-				state_of_charge += battery_charge_increment;
-			}
-			else
-			{
-				state_of_charge = battery_fully_charged;
-				battery_charging = false;
-			}
-		}
-		else if (battery_discharging)
-		{
-			if ( (state_of_charge - battery_discharge_decrement) >= battery_fully_discharged )
-			{
-				state_of_charge -= battery_discharge_decrement;
-			}
-			else
-			{
-				state_of_charge = battery_fully_discharged;
-				battery_discharging = false;
-			}
-		}
+        if (battery_charging)
+        {
+            if ( (state_of_charge + battery_charge_increment) <= battery_fully_charged )
+            {
+                state_of_charge += battery_charge_increment;
+            }
+            else
+            {
+                state_of_charge = battery_fully_charged;
+                battery_charging = false;
+            }
+        }
+        else if (battery_discharging)
+        {
+            if ( (state_of_charge - battery_discharge_decrement) >= battery_fully_discharged )
+            {
+                state_of_charge -= battery_discharge_decrement;
+            }
+            else
+            {
+                state_of_charge = battery_fully_discharged;
+                battery_discharging = false;
+            }
+        }
     }
 }
 
