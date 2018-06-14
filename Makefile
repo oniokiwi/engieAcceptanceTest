@@ -3,7 +3,7 @@ IDIR=../libmodbus/src
 LDIR=/usr/local/lib
 
 
-TARGET=engieAcceptTest
+TARGET=bluekolding
 CC=gcc
 #CFLAGS=-I$(IDIR) -L$(LDIR) -g -std=gnu99
 CFLAGS= -g -I/usr/local/include -L/usr/local/lib
@@ -13,12 +13,12 @@ CFLAGS= -g -I/usr/local/include -L/usr/local/lib
 default: $(TARGET)
 all: default
 
-SRC_C=engie.c \
+SRC_C=bluekolding.c \
       main.c
 
 
 HDR=typedef.h \
-    engie.h 
+    bluekolding.h 
     
 
 LIBS=-lpthread -lmodbus

@@ -7,6 +7,6 @@ _isRunning() {
 }
 
 if ! _isRunning engieAcceptTest; then
-    "${HOME}/workspace/engieAcceptTest/engieAcceptTest" &
+    "${HOME}/workspace/battsim/battsim" &
 fi
 

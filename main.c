@@ -15,7 +15,7 @@
 #include <stdbool.h>
 #include <sys/syscall.h>
 #include "typedefs.h"
-#include "engie.h"
+#include "bluekolding.h"
 
 const uint16_t UT_REGISTERS_NB = 65535;
 static uint8_t query[MODBUS_TCP_MAX_ADU_LENGTH];
@@ -89,7 +89,7 @@ int main(int argc, char* argv[])
     scan_options(argc, argv);
     init(&param);
 
-    printf("staring Engie acceptance test - listening on Port %d\n", param.port);
+    printf("staring blueKolding - listening on Port %d\n", param.port);
 
     for (;;)
     {
@@ -108,6 +108,7 @@ int main(int argc, char* argv[])
         while (!done)
         {
             rc = modbus_receive(param.ctx, query);
+            printf("rc = %d\n", rc);
             switch (rc)
             {
             case -1:
@@ -180,17 +181,26 @@ void query_handler(modbus_pdu_t* mb)
     fc = mb->fcode;
     switch ( fc ){
     case MODBUS_FC_READ_HOLDING_REGISTERS:
-        //printf("%s MODBUS_FC_READ_HOLDING_REGISTERS\n", __PRETTY_FUNCTION__);
+        printf("%s MODBUS_FC_READ_HOLDING_REGISTERS\n", __PRETTY_FUNCTION__);
         address = (mb->data[i++] * convert_bytes2word_value) + mb->data[i++]; // address
         value   = (mb->data[i++] * convert_bytes2word_value) + mb->data[i++]; // data
         retval  = process_read_register(address, value);
         break;
 
     case MODBUS_FC_WRITE_SINGLE_REGISTER:
-        //printf("%s MODBUS_FC_WRITE_SINGLE_REGISTER\n", __PRETTY_FUNCTION__);
+        printf("%s MODBUS_FC_WRITE_SINGLE_REGISTER\n", __PRETTY_FUNCTION__);
         address = (mb->data[i++] * convert_bytes2word_value) + mb->data[i++]; // address
         value   = (mb->data[i++] * convert_bytes2word_value) + mb->data[i++]; // data
         retval  = process_write_register(address, value);
+        break;
+
+    case MODBUS_FC_WRITE_MULTIPLE_REGISTERS:
+        printf("%s MODBUS_FC_WRITE_MULTIPLE_REGISTERS\n", __PRETTY_FUNCTION__);
+        address = (mb->data[i++] * convert_bytes2word_value) + mb->data[i++]; // address
+        count = (mb->data[i++] * convert_bytes2word_value) + mb->data[i++];   // register count
+        i++;                                             // skip over byte count
+        retval = process_write_multiple_addresses(address, count, &mb->data[i]);
+        i += (count*2);
         break;
 
     default:
